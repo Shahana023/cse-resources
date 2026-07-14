@@ -27,7 +27,7 @@ N_STEPS    = int(os.environ.get("N_STEPS", "150"))     # naive-attack steps
 A_STEPS    = int(os.environ.get("A_STEPS", "200"))     # adaptive-attack steps
 LAMBDA     = float(os.environ.get("LAMBDA", "8.0"))    # weight on "evade the defense"
 PATCH_SIZE = int(os.environ.get("PATCH_SIZE", "100"))
-IMG_SIZE   = (int(os.environ.get("IMG_H", "600")), int(os.environ.get("IMG_W", "800")))  # (H, W)
+IMG_SIZE   = (int(os.environ.get("IMG_H", "384")), int(os.environ.get("IMG_W", "1280")))  # (H, W) — KITTI aspect ratio
 WINDOW, STRIDE, THRESHOLD = 64, 32, 6.0                # saliency-defense settings
 
 processor = DetrImageProcessor.from_pretrained("facebook/detr-resnet-50")
@@ -52,9 +52,10 @@ def load_image_as_tensor(source, is_url=True):
     return torch.from_numpy(arr).permute(2, 0, 1).unsqueeze(0).to(device), img
 
 CANDIDATE_URLS = [
+    # A real KITTI frame (the standard AV benchmark); the rest are fallbacks.
+    "https://raw.githubusercontent.com/open-mmlab/mmdetection3d/main/demo/data/kitti/000008.png",
     "https://upload.wikimedia.org/wikipedia/commons/7/7a/20180914_Ann_Arbor_traffic.jpg",
     "http://images.cocodataset.org/val2017/000000037777.jpg",
-    "http://images.cocodataset.org/val2017/000000039769.jpg",
 ]
 image_tensor = pil_image = None
 for _u in CANDIDATE_URLS:
