@@ -19,6 +19,12 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from transformers import DetrImageProcessor, DetrForObjectDetection
 
+try:                                       # faster, more robust model download — no token needed
+    import hf_transfer  # noqa: F401
+    os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
+except Exception:
+    pass
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("Using device:", device)
 
