@@ -1,21 +1,17 @@
-# autonomous_vit — DETR patch attack & explainable defense (demo)
+# autonomous_vit — DETR adversarial-robustness demo
 
-A self-contained, runnable demonstration of:
-1. A pretrained **DETR** transformer object detector,
-2. An **adversarial patch** (EOT-lite) that hides objects from it,
-3. An **explainable, saliency-based defense** that flags the attack and shows *where* it reacted,
-4. A **timing** check for the real-time (edge) constraint.
+A runnable proof-of-concept for a PhD research proposal on **adversarially robust,
+explainable defenses for autonomous-vehicle object detectors (DETR-family)**.
 
-### Run it in the browser (no local setup)
-Open the notebook and click **“Open in Colab”**, then `Runtime → Change runtime type → GPU`, then `Runtime → Run all`:
+## Run it in the browser (no setup)
+Open the notebook and click **Open in Colab**, then `Runtime → Run all`:
+- [`AV_adversarial_defense_proposal_demo.ipynb`](AV_adversarial_defense_proposal_demo.ipynb)
 
-- [`DETR_patch_attack_defense_demo.ipynb`](DETR_patch_attack_defense_demo.ipynb)
+## What it shows (on a real KITTI frame)
+1. A pretrained **DETR** detector finds the vehicles/objects.
+2. A **near-invisible** digital adversarial perturbation (max change ~0.03/pixel) makes DETR detect **nothing**.
+3. A cheap **high-frequency probe** flags this (non-adaptive) attack.
+4. Honest framing: physical patch attacks + an **adaptive-robust, explainable** defense on
+   DETR is the open problem the PhD targets.
 
-### Files
-| File | What it is |
-|---|---|
-| `DETR_patch_attack_defense_demo.ipynb` | The main notebook (9 steps, with explanations). |
-| `detr_patch_demo.py` | Headless version of the same code, for running on a server/CI. |
-| `outputs/` | Generated plots + `summary.json` after a run. |
-
-> ⚠️ **This is a learning / proof-of-concept artifact, not a research result.** It runs a *digital* simulation of a physical attack on a *single* image with a *non-adaptive* evaluation. Read **Step 9 (Limitations)** in the notebook before drawing any conclusions.
+`outputs/` holds the generated figures. See **Step 8** in the notebook for honest limitations.

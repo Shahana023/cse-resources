@@ -1,0 +1,13 @@
+{
+  "n_clean": 17,
+  "n_attacked": 0,
+  "linf": 0.031,
+  "eps": 0.031,
+  "steps": 30,
+  "hf_clean": 0.0668,
+  "hf_attacked": 0.0886,
+  "hf_ratio": 1.33,
+  "flagged": true,
+  "base_ms": 80.1,
+  "def_ms": 0.684
+}
